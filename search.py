@@ -1,6 +1,6 @@
 import requests
 import lxml
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString
 from download import *
 
 #Various parameters for the url
@@ -20,13 +20,27 @@ def retrieve_results(title, FORMAT = "epub", LANGUAGE = "English", MIRROR_ID = "
     url = "https://libgen.rs/fiction/?q=%"+ title + "&criteria=&language=" + LANGUAGE + "&format=" + FORMAT
     req = requests.get(url, headers)
     soup = BeautifulSoup(req.content, "lxml")
-    all_results = soup.find_all(text="[" + MIRROR_ID + "]")
-    for row in all_results:
+    #TODO: Include ability to choose mirror_id
+
+    tbody = soup.find('tbody')
+    tr_items = tbody.children
+    # Parse author information
+    for tr in tr_items:
+        # Ignore empty spaces in the code
+        if isinstance(tr, NavigableString): continue
         i += 1
-        mirror_link = row.parent.get('href')
-        results_dict[i] = mirror_link
+        results_dict[i] = []
+        # Parse every column
+        td_items = tr.find_all('td')
+        for enum, td in enumerate(td_items):
+            if enum == 5:
+                mirror_link = td.find(text="[" + MIRROR_ID + "]").parent.get("href")
+                results_dict[i].append(mirror_link)
+                continue
+            results_dict[i].append(td.text)
 
     return results_dict
+
 
     # download_req = requests.get(chosen_option_link, headers)
     # soup = BeautifulSoup(download_req.content, "lxml")
