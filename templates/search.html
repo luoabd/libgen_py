@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sample Table</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/static/css/search.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row height d-flex justify-content-center align-items-center">
+        <div class="col-md-6">
+          <form class="form" action="/results" method="post">
+            <i class="fa fa-search"></i>
+            <input
+              type="text"
+              class="form-control form-input"
+              placeholder="Search for a novel..."
+              name="title"
+            />
+            <span class="left-pan"
+              ><i class="fa fa-arrow-circle-right"></i
+            ></span>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
