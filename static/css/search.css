@@ -43,3 +43,7 @@ body {
     box-shadow: none;
     border: none
 }
+
+.submit {
+    cursor: pointer;
+}

@@ -20,7 +20,7 @@
     <div class="container">
       <div class="row height d-flex justify-content-center align-items-center">
         <div class="col-md-6">
-          <form class="form" action="/results/1" method="post">
+          <form name="myform" class="form" action="/results/1" method="post">
             <i class="fa fa-search"></i>
             <input
               type="text"
@@ -28,7 +28,7 @@
               placeholder="Search for a novel..."
               name="title"
             />
-            <span class="left-pan"
+            <span class="left-pan submit" onclick="myform.submit()"
               ><i class="fa fa-arrow-circle-right"></i
             ></span>
           </form>
