@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-from flask_paginate import Pagination, get_page_args
 import ast
 import search
 
