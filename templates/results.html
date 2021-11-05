@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-					{% for key, value in results_dict.items(): %}
+					{% for value in results_dict: %}
                     <tr>
 						<td>
 							<span class="custom-checkbox">
@@ -45,25 +45,26 @@
 								<label for="checkbox1"></label>
 							</span>
 						</td>
-                        <td>{{ value[0] }}</td>
-                        <td>{{ value[2] }}</td>
-						<td>{{ value[1] }}</td>
-                        <td>{{ value[3] }}</td>
-                        <td>{{ value[4] }}</td>
+                        <td>{{ value[1][0] }}</td>
+                        <td>{{ value[1][2] }}</td>
+						<td>{{ value[1][1] }}</td>
+                        <td>{{ value[1][3] }}</td>
+                        <td>{{ value[1][4] }}</td>
                     </tr>
 					{% endfor %}
                 </tbody>
             </table>
 			<div class="clearfix">
-                <div class="hint-text">Showing <b>{{results_dict | length}}</b> out of <b>25</b> entries</div>
                 <ul class="pagination">
+					{% set current_page = results_dict.page | int %}
+					{% if current_page == 1 %}
                     <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+					{% else %}
+					<li class="page-item"><a href="{{ url_for('results', pagenum = current_page - 1, input = results_dict.data)}}">Previous</a></li>
+					{% endif %}
+                    <!-- <li class="page-item"><a href="#" class="page-link">1</a></li> -->
+                    <li class="page-item active"><a href="#" class="page-link">{{current_page}}</a></li>
+                    <li class="page-item"><a href="{{ url_for('results', pagenum = current_page + 1, input = results_dict.data)}}" class="page-link" method="post">Next</a></li>
                 </ul>
             </div>
         </div>
